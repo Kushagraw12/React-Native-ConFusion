@@ -15,7 +15,7 @@ function RenderDish(props) {
       </Card>
     );
   } else {
-    return <view />;
+    return <View />;
   }
 }
 

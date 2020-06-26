@@ -27,7 +27,7 @@ class Main extends Component {
         <Dishdetail
           dish={
             this.state.dishes.filter(
-              (dish) => dishId === this.state.selectedDish
+              (dish) => dish.id === this.state.selectedDish
             )[0]
           }
         />
