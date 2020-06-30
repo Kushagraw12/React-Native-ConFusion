@@ -3,7 +3,6 @@ import { ScrollView, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import { DISHES } from "../shared/dishes";
 import { LEADERS } from "../shared/leaders";
-import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
 
 function RenderItem(props) {
@@ -29,7 +28,6 @@ class Home extends Component {
       dishes: DISHES,
       promotions: PROMOTIONS,
       leaders: LEADERS,
-      comments: COMMENTS,
     };
   }
   render() {
@@ -44,9 +42,6 @@ class Home extends Component {
         <RenderItem
           item={this.state.leaders.filter((leader) => leader.featured)[0]}
         />
-        {/*<RenderItem
-          item={this.state.comments.filter((comment) => comment.id)[0]}
-        />*/}
       </ScrollView>
     );
   }
