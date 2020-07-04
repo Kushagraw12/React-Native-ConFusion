@@ -1,11 +1,18 @@
-import * as React from "react";
-{
-  /*import { Platform, StyleSheet, Text, View } from "react-native";*/
-}
+import React, { Component } from "react";
 import Main from "./components/MainComponent";
+import { Provider } from "react-redux";
+import { ConfigureStore } from "./redux/configStore";
 
-export default function App() {
-  return <Main />;
+const store = ConfigureStore();
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Main />
+      </Provider>
+    );
+  }
 }
 {
   /*

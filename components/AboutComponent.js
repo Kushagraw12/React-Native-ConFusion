@@ -4,6 +4,14 @@ import { Card } from "react-native-elements";
 import { ABOUT } from "../shared/about";
 import { LEADERS } from "../shared/leaders";
 import { ListItem } from "react-native-elements";
+import { connect } from "react-redux";
+import { baseUrl } from "../shared/baseUrl";
+
+const mapStateToProps = (state) => {
+  return {
+    leaders: state.leaders,
+  };
+};
 
 function RenderHistory(props) {
   const item = props.item;
@@ -27,7 +35,7 @@ function RenderLeader({ item, index }) {
         title={item.name}
         subtitle={item.description}
         hideChevron={true}
-        leftAvatar={{ source: require("./images/alberto.png") }}
+        leftAvatar={{ source: { uri: baseUrl + item.image } }}
       />
     );
   } else {
@@ -40,7 +48,6 @@ class About extends Component {
     super(props);
     this.state = {
       abt: ABOUT,
-      leaders: LEADERS,
     };
   }
   render() {
@@ -51,7 +58,7 @@ class About extends Component {
         />
         <Card title="Corporate Leadership">
           <FlatList
-            data={this.state.leaders}
+            data={this.props.leaders.leaders}
             renderItem={RenderLeader}
             keyExtractor={(item) => item.id.toString()}
           />
@@ -61,4 +68,4 @@ class About extends Component {
   }
 }
 
-export default About;
+export default connect(mapStateToProps)(About);
