@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { ScrollView, Text, View, FlatList, Image } from "react-native";
 import { Card } from "react-native-elements";
 import { ABOUT } from "../shared/about";
-import { LEADERS } from "../shared/leaders";
 import { ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -51,20 +51,38 @@ class About extends Component {
     };
   }
   render() {
-    return (
-      <ScrollView>
-        <RenderHistory
-          item={this.state.abt.filter((about) => about.featured)[0]}
-        />
-        <Card title="Corporate Leadership">
-          <FlatList
-            data={this.props.leaders.leaders}
-            renderItem={RenderLeader}
-            keyExtractor={(item) => item.id.toString()}
+    if (this.props.leaders.isLoading) {
+      return (
+        <ScrollView>
+          <Card title="Corporate Leadership">
+            <Loading />
+          </Card>
+        </ScrollView>
+      );
+    } else if (this.props.leaders.errMess) {
+      return (
+        <ScrollView>
+          <Card title="Corporate Leadership">
+            <Text>{this.props.leaders.errMess}</Text>
+          </Card>
+        </ScrollView>
+      );
+    } else {
+      return (
+        <ScrollView>
+          <RenderHistory
+            item={this.state.abt.filter((about) => about.featured)[0]}
           />
-        </Card>
-      </ScrollView>
-    );
+          <Card title="Corporate Leadership">
+            <FlatList
+              data={this.props.leaders.leaders}
+              renderItem={RenderLeader}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          </Card>
+        </ScrollView>
+      );
+    }
   }
 }
 
