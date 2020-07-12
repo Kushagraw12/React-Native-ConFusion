@@ -11,6 +11,7 @@ import { Icon } from "react-native-elements";
 import Home from "./HomeComponent";
 import Menu from "./MenuComponent";
 import Dishdetail from "./DishdetailComponent";
+import Reservation from "./ReservationComponent";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import { connect } from "react-redux";
@@ -171,6 +172,32 @@ function AboutUsNavigatorScreen() {
   );
 }
 
+const ReservationNavigator = createStackNavigator();
+
+function ReservationNavigatorScreen() {
+  return (
+    <ReservationNavigator.Navigator
+      initialRouteName="Reservation"
+      screenOptions={HeaderStyle}
+    >
+      <ReservationNavigator.Screen
+        name="Reservation"
+        component={Reservation}
+        options={({ navigation }) => ({
+          headerLeft: () => (
+            <Icon
+              name="menu"
+              size={24}
+              color="white"
+              onPress={() => navigation.toggleDrawer()}
+            />
+          ),
+        })}
+      />
+    </ReservationNavigator.Navigator>
+  );
+}
+
 const MainNavigator = createDrawerNavigator();
 
 function MainNavigatorDrawer() {
@@ -224,6 +251,20 @@ function MainNavigatorDrawer() {
               name="address-card"
               type="font-awesome"
               size={22}
+              color={tintColor}
+            />
+          ),
+        }}
+      />
+      <MainNavigator.Screen
+        name="Reservation"
+        component={ReservationNavigatorScreen}
+        options={{
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name="cutlery"
+              type="font-awesome"
+              size={24}
               color={tintColor}
             />
           ),
