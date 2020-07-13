@@ -25,6 +25,8 @@ const mapDispatchToProps = (dispatch) => ({
   postFavorite: (dishId) => dispatch(postFavorite(dishId)),
   postComments: (dishId, rating, author, comment) =>
     dispatch(postComments(dishId, rating, author, comment)),
+  addComment: (dishId, rating, comment, author) =>
+    dispatch(addComment(dishId, rating, comment, author)),
 });
 
 function RenderDish(props) {
@@ -69,7 +71,15 @@ function RenderComments(props) {
     return (
       <View key={index} style={{ margin: 10 }}>
         <Text style={{ fontSize: 14 }}>{item.comment}</Text>
-        <Text style={{ fontSize: 12 }}>{item.rating}</Text>
+        <Rating
+          type="star"
+          ratingCount={5}
+          fractions={1}
+          imageSize={12}
+          startingValue={item.rating}
+          readonly
+          style={{ marginLeft: 2 }}
+        />
         <Text style={{ fontSize: 12 }}>
           {"-- " + item.author + " " + item.date}
         </Text>
