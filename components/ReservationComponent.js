@@ -125,7 +125,7 @@ class Reservation extends Component {
               Number of Guests: {this.state.guests}
             </Text>
             <Text style={styles.modalText}>
-              Smoking? : {this.state.smoking ? "Yes" : "No"}
+              Smoking Table? {this.state.smoking ? "Yes" : "No"}
             </Text>
             <Text style={styles.modalText}>
               Date and Time: {this.state.date}
