@@ -7,6 +7,8 @@ import {
   Modal,
   StyleSheet,
   Button,
+  PanResponder,
+  Alert,
 } from "react-native";
 import { Card, Icon, Rating, Input } from "react-native-elements";
 import { connect } from "react-redux";
@@ -33,9 +35,48 @@ const mapDispatchToProps = (dispatch) => ({
 function RenderDish(props) {
   const dish = props.dish;
 
+  const recogonizeDrag = ({ moveX, moveY, dx, dy }) => {
+    if (dx < -200) return true;
+    else return false;
+  };
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: (e, gestureState) => {
+      return true;
+    },
+    onPanResponderEnd: (e, gestureState) => {
+      if (recogonizeDrag(gestureState))
+        Alert.alert(
+          "Add to Favorite?",
+          "Are you sure you want to add " + dish.name + " to your favorites?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log(" Operation Cancelled"),
+              style: "cancel",
+            },
+            {
+              text: "Yes",
+              onPress: () =>
+                props.favorite
+                  ? console.log("Already favorite")
+                  : props.onPress(),
+            },
+          ],
+          { cancelable: false }
+        );
+      return true;
+    },
+  });
+
   if (dish != null) {
     return (
-      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+      <Animatable.View
+        animation="fadeInDown"
+        duration={2000}
+        delay={1000}
+        {...panResponder.panHandlers}
+      >
         <Card featuredTitle={dish.name} image={{ uri: baseUrl + dish.image }}>
           <Text style={{ margin: 10 }}>{dish.description}</Text>
           <View style={{ flex: 1, flexDirection: "row" }}>
