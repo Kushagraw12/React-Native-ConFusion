@@ -2,23 +2,26 @@ import React, { Component } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import { ADDRESS } from "../shared/address";
+import * as Animatable from "react-native-animatable";
 
 function RenderItem(props) {
   const item = props.item;
   if (item != null) {
     return (
-      <Card
-        featuredTitle={item.title}
-        featuredSubtitle={item.designation}
-        title={item.title}
-      >
-        <Text style={{ margin: 10 }}>{item.line1}</Text>
-        <Text style={{ margin: 10 }}>{item.line2}</Text>
-        <Text style={{ margin: 10 }}>{item.line3}</Text>
-        <Text style={{ margin: 10 }}>{item.tel}</Text>
-        <Text style={{ margin: 10 }}>{item.fax}</Text>
-        <Text style={{ margin: 10 }}>{item.email}</Text>
-      </Card>
+      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+        <Card
+          featuredTitle={item.title}
+          featuredSubtitle={item.designation}
+          title={item.title}
+        >
+          <Text style={{ margin: 10 }}>{item.line1}</Text>
+          <Text style={{ margin: 10 }}>{item.line2}</Text>
+          <Text style={{ margin: 10 }}>{item.line3}</Text>
+          <Text style={{ margin: 10 }}>{item.tel}</Text>
+          <Text style={{ margin: 10 }}>{item.fax}</Text>
+          <Text style={{ margin: 10 }}>{item.email}</Text>
+        </Card>
+      </Animatable.View>
     );
   } else {
     return <View></View>;
