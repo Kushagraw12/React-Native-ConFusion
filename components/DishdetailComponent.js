@@ -39,7 +39,12 @@ function RenderDish(props) {
   const viewRef = useRef(null);
 
   const recogonizeDrag = ({ moveX, moveY, dx, dy }) => {
-    if (dx < -200) return true;
+    if (dx < -150) return true;
+    else return false;
+  };
+
+  const recognizeComment = ({ moveX, moveY, dx, dy }) => {
+    if (dx > -150) return true;
     else return false;
   };
 
@@ -52,7 +57,7 @@ function RenderDish(props) {
       viewRef.current
         .rubberBand(1000)
         .then((endState) =>
-          console.log(endState.finished ? "finished" : "cancelled")
+          console.log(endState.finished ? "Finished" : "Cancelled")
         );
     },
 
@@ -77,6 +82,7 @@ function RenderDish(props) {
           ],
           { cancelable: false }
         );
+      else if (recognizeComment(gestureState)) props.openModal();
       return true;
     },
   });
@@ -123,39 +129,31 @@ function RenderDish(props) {
     return <View />;
   }
 }
-
-function RenderComments(props) {
-  const comments = props.comment;
-  const renderComments = ({ item, index }) => {
-    return (
-      <View key={index} style={{ margin: 10 }}>
-        <Text style={{ fontSize: 14 }}>{item.comment}</Text>
-        <Rating
-          type="star"
-          ratingCount={5}
-          fractions={1}
-          imageSize={12}
-          startingValue={item.rating}
-          readonly
-          style={{ marginLeft: 2 }}
-        />
-        <Text style={{ fontSize: 12 }}>
-          {"-- " + item.author + " " + item.date}
-        </Text>
-      </View>
-    );
-  };
-  return (
-    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
-      <Card title="Comments">
-        <FlatList
-          data={comments}
-          renderItem={renderComments}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </Card>
-    </Animatable.View>
+function RenderComments({ comments }) {
+  const renderCommentItem = ({ item, index }) => (
+    <View key={index} style={{ margin: 10 }}>
+      <Text style={{ fontSize: 14 }}>{item.comment}</Text>
+      <Rating readonly startingValue={item.rating} imageSize={15} />
+      {/*  <Text style={{ fontSize: 12 }}>{`${item.rating} Stars`}</Text>*/}
+      <Text style={{ fontSize: 12 }}>{`--${item.author}, ${item.date}`}</Text>
+    </View>
   );
+
+  if (comments != null) {
+    return (
+      <Animatable.View animation="fadeInUp" duration={2000}>
+        <Card title="Comments">
+          <FlatList
+            data={comments}
+            renderItem={renderCommentItem}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </Card>
+      </Animatable.View>
+    );
+  }
+
+  return <View />;
 }
 
 class Dishdetail extends Component {
@@ -180,14 +178,8 @@ class Dishdetail extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
-  handleComment(dishId) {
-    console.log(JSON.stringify(this.state) + dishId);
-    this.props.postComments(
-      dishId,
-      this.state.rating,
-      this.state.author,
-      this.state.comment
-    );
+  handleComment(dishId, rating, author, comment) {
+    this.props.postComments(dishId, rating, author, comment);
     this.toggleModal();
     this.resetForm();
   }
@@ -213,7 +205,7 @@ class Dishdetail extends Component {
           openModal={() => this.toggleModal()}
         />
         <RenderComments
-          comment={this.props.comments.comments.filter(
+          comments={this.props.comments.comments.filter(
             (comment) => comment.dishId === dishId
           )}
         />
@@ -231,64 +223,49 @@ class Dishdetail extends Component {
           }}
         >
           <View style={styles.modal}>
-            <View style={{ marginTop: 50, marginBottom: 10 }}>
-              <Rating
-                type="star"
-                ratingCount={5}
-                fractions={1}
-                startingValue={5}
-                imageSize={20}
-                onFinishRating={(rating) => {
-                  this.setState({ rating: rating });
-                }}
-                showRating
-                style={{ paddingVertical: 10 }}
-              />
-            </View>
-            <View style={{ margin: 10 }}>
-              <Input
-                placeholder="Author"
-                leftIcon={{ type: "font-awesome", name: "user-o" }}
-                size={24}
-                onChangeText={(text) => {
-                  this.setState({ author: text });
-                }}
-              />
-            </View>
-            <View style={{ margin: 10 }}>
-              <Input
-                placeholder="Comment"
-                leftIcon={{ type: "font-awesome", name: "comment-o" }}
-                onChangeText={(text) => {
-                  this.setState({ comment: text });
-                }}
-              />
-            </View>
-            <View style={{ margin: 10 }}>
-              <Button
-                onPress={() => {
-                  this.handleComment(
-                    dishId,
-                    this.state.author,
-                    this.state.rating,
-                    this.state.comment
-                  );
-                  this.resetForm();
-                }}
-                color="#512DA8"
-                title="SUBMIT"
-              />
-            </View>
-            <View style={{ margin: 10 }}>
-              <Button
-                onPress={() => {
-                  this.toggleModal();
-                  this.resetForm();
-                }}
-                color="#333"
-                title="CANCEL"
-              />
-            </View>
+            <Rating
+              type="star"
+              ratingCount={5}
+              fractions={0}
+              startingValue={5}
+              imageSize={40}
+              onFinishRating={(rating) => {
+                this.setState({ rating: rating });
+              }}
+              showRating
+              style={{ paddingVertical: 10 }}
+            />
+            <Input
+              placeholder="Author"
+              leftIcon={{ type: "font-awesome", name: "user-o" }}
+              onChangeText={(text) => this.setState({ author: text })}
+            />
+            <Input
+              placeholder="Comment"
+              leftIcon={{ type: "font-awesome", name: "comment-o" }}
+              onChangeText={(text) => this.setState({ comment: text })}
+            />
+            <Button
+              onPress={() => {
+                this.handleComment(
+                  dishId,
+                  this.state.rating,
+                  this.state.author,
+                  this.state.comment
+                );
+                this.resetForm();
+              }}
+              color="#512DA8"
+              title="SUBMIT"
+            />
+            <Button
+              onPress={() => {
+                this.toggleModal();
+                this.resetForm();
+              }}
+              color="#333"
+              title="CANCEL"
+            />
           </View>
         </Modal>
       </ScrollView>

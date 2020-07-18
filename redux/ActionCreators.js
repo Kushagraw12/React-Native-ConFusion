@@ -21,7 +21,7 @@ export const fetchComments = () => (dispatch) => {
       }
     )
     .then((response) => response.json())
-    .then((comments) => dispatch(addComments(comments)))
+    .then((comments) => dispatch(addComment(comments)))
     .catch((error) => dispatch(commentsFailed(error.message)));
 };
 
@@ -30,7 +30,7 @@ export const commentsFailed = (errmess) => ({
   payload: errmess,
 });
 
-export const addComments = (comments) => ({
+export const addComment = (comments) => ({
   type: ActionTypes.ADD_COMMENTS,
   payload: comments,
 });
@@ -172,14 +172,14 @@ export const postComments = (dishId, rating, author, comment) => (dispatch) => {
     rating: rating,
     author: author,
     comment: comment,
+    date: new Date().toISOString(),
   };
-  newComment.date = new Date().toISOString();
-
   setTimeout(() => {
-    dispatch(addComment(newComment));
+    dispatch(addComments(newComment));
   }, 2000);
 };
-export const addComment = (comment) => ({
+
+export const addComments = (comment) => ({
   type: ActionTypes.ADD_COMMENTS,
   payload: comment,
 });
