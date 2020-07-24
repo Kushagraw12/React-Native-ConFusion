@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
   emailbtn: {
     backgroundColor: "#512DA8",
     width: "50%",
-    marginLeft: 20,
+    justifyContent: "center",
+    alignSelf: "center",
     marginTop: 10,
   },
 });
