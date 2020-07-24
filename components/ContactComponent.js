@@ -50,12 +50,14 @@ class Address extends Component {
         <RenderItem
           item={this.state.address.filter((adr) => adr.featured)[0]}
         />
-        <Button
-          title="Contact us via Email"
-          buttonStyle={styles.emailbtn}
-          icon={<Icon name="envelope-o" type="font-awesome" color="white" />}
-          onPress={this.sendMail}
-        />
+        <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
+          <Button
+            title="Contact us via Email"
+            buttonStyle={styles.emailbtn}
+            icon={<Icon name="envelope-o" type="font-awesome" color="white" />}
+            onPress={this.sendMail}
+          />
+        </Animatable.View>
       </ScrollView>
     );
   }

@@ -7,6 +7,6 @@ export const ADDRESS = [
     line3: "HONG KONG",
     tel: "Tel: +852 1234 5678",
     fax: "Fax: +852 8765 4321",
-    email: "Email:confusion@food.net",
+    email: "Email:kush12092001@gmail.com",
   },
 ];
