@@ -88,11 +88,22 @@ class Reservation extends Component {
       },
 
       android: {
-        channelId: "notify",
-        sound: true,
+        channelId: "reservation",
+
         color: "#512DA8",
       },
     });
+    if (Platform.OS === "android") {
+      Notifications.createChannelAndroidAsync("reservation", {
+        name: "Confusion",
+
+        sound: true,
+
+        vibrate: [0, 250, 250, 250],
+
+        priority: "max",
+      });
+    }
   }
 
   render() {
