@@ -4169,6 +4169,11 @@ expo-asset@~8.1.7:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
+expo-calendar@~8.2.1:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/expo-calendar/-/expo-calendar-8.2.2.tgz#2edf6d45941f59a12d2a14447533db40369b0cd7"
+  integrity sha512-68fMMP+sARcHUIu4/TuDHkmu+FsYU1ymoaajvz+AIkSANco57HYEV+UStNQ+FSwq+PwPIESNXb4H+pStdS6xWA==
+
 expo-camera@~8.3.1:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.3.1.tgz#e17c080c4aafd71f66495c2b6dfc53dcd31b0368"
@@ -4247,6 +4252,13 @@ expo-linking@~1.0.3:
     expo-constants "~9.1.1"
     qs "^6.5.0"
     url-parse "^1.4.4"
+
+expo-localization@~8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/expo-localization/-/expo-localization-8.2.1.tgz#99d422670d9e4261268f1feed9c4d228183a745b"
+  integrity sha512-T2S1J6L0VaKdiO10kQk690GGMdO990zKXKGvdw5D8UEfoFomXh0W2CTtfqN2HCkkpc7iqvn7MYaKN0yJxu+jJQ==
+  dependencies:
+    rtl-detect "^1.0.2"
 
 expo-location@~8.2.1:
   version "8.2.1"
@@ -8622,6 +8634,13 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
+react-native-modal-datetime-picker@^8.7.1:
+  version "8.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-8.7.1.tgz#9769492f3e61d48bad06817f8986cb8be4a46acc"
+  integrity sha512-wcP8WRe9uDqWF9KdScItkDSfJ3w/xi4fGAe8Q9xvU15+7sWWCHDJzXMlRv2Jeeu7MIlHS6XBisTprvqBcqjwtA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-ratings@^6.3.0:
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-6.5.0.tgz#a1606ccba3c5b54eec8e6cfa4765a45cf0e4ab8d"
@@ -9259,6 +9278,11 @@ rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
+
+rtl-detect@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/rtl-detect/-/rtl-detect-1.0.2.tgz#8eca316f5c6563d54df4e406171dd7819adda67f"
+  integrity sha512-5X1422hvphzg2a/bo4tIDbjFjbJUOaPZwqE6dnyyxqwFqfR+tBcvfqapJr0o0VygATVCGKiODEewhZtKF+90AA==
 
 run-async@^0.1.0:
   version "0.1.0"

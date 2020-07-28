@@ -43,4 +43,6 @@ target 'kk' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
 end
