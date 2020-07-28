@@ -235,7 +235,7 @@ class Reservation extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   formRow: {
     alignItems: "center",
     justifyContent: "center",
@@ -266,6 +266,6 @@ const styles = {
     fontSize: 18,
     margin: 10,
   },
-};
+});
 
 export default Reservation;
