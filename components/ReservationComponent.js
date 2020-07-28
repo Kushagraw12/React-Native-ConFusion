@@ -258,7 +258,7 @@ const styles = {
     fontSize: 24,
     fontWeight: "bold",
     backgroundColor: "#512DA8",
-    testAlign: "center",
+    textAlign: "center",
     color: "white",
     marginBottom: 20,
   },
