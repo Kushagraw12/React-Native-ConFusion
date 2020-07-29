@@ -250,7 +250,7 @@ class Dishdetail extends Component {
             <Rating
               type="star"
               ratingCount={5}
-              fractions={0}
+              fractions={1}
               startingValue={5}
               imageSize={40}
               onFinishRating={(rating) => {
@@ -279,7 +279,8 @@ class Dishdetail extends Component {
                 );
                 this.resetForm();
               }}
-              color="#512DA8"
+              style={{ padding: 20 }}
+              color="#512DA9"
               title="SUBMIT"
             />
             <Button
@@ -287,6 +288,7 @@ class Dishdetail extends Component {
                 this.toggleModal();
                 this.resetForm();
               }}
+              style={{ margin: 40 }}
               color="#333"
               title="CANCEL"
             />
