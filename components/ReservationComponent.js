@@ -34,12 +34,12 @@ class Reservation extends Component {
 
   toggleModal() {
     this.setState({ showModal: !this.state.showModal });
-    this.presentLocalNotification(this.state.date);
   }
 
   handleReservation() {
     console.log(JSON.stringify(this.state));
     this.toggleModal();
+    this.presentLocalNotification(this.state.date);
     this.addReservationToCalendar(this.state.date);
   }
 
@@ -91,10 +91,12 @@ class Reservation extends Component {
 
   async addReservationToCalendar(date) {
     this.obtainCalendarPermission();
+    var sd = new Date(Date.Parse(date));
+    var ed = new Date(Date.Parse(date) + 2 * 3600 * 1000);
     const newCalendarID = await Calendar.createEventAsync({
       title: "Con Fusion Table Reservation",
-      startDate: new Date(Date.Parse(date)),
-      endDate: new Date(Date.Parse(date) + 2 * 3600 * 1000),
+      startDate: sd,
+      endDate: ed,
       timeZone: "Asia/Hong_Kong",
       location:
         "121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong",
@@ -118,11 +120,11 @@ class Reservation extends Component {
           style: "cancel",
         },
         {
-          text: "OK",
+          text: "Confirm",
           onPress: () => {
             this.toggleModal();
-            this.resetForm();
             this.addReservationToCalendar(this.state.date);
+            this.resetForm();
           },
         },
       ],

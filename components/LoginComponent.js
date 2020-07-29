@@ -233,7 +233,7 @@ class RegisterTab extends Component {
             <Button
               title="Gallery"
               onPress={this.getImageFromGallery}
-              style={styles.ImageBtn}
+              style={styles.galbtn}
             />
           </View>
           <Input
@@ -375,8 +375,13 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: null,
   },
+  galbtn: {
+    marginLeft: 10,
+    marginRight: 0,
+  },
   formButton: {
     margin: 60,
+    padding: 20,
   },
 });
 
