@@ -1,17 +1,16 @@
 {
-  "name": "kk",
-  "displayName": "kk",
   "expo": {
-    "name": "kk",
-    "slug": "expo-template-bare",
+    "name": "Confusion",
+    "icon": "./logo.png",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "slug": "Kushagra-wadhwa-kushagraw12",
+    "ios": {
+      "bundleIdentifier": "kushagraw12.wadhwa.Kushagra",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "kushagraw12.wadhwa.Kushagra",
+      "versionCode": 1
+    }
   }
 }
